@@ -1,5 +1,6 @@
 package assign251_2;
 
+import org.apache.logging.log4j.message.SimpleMessage;
 import org.junit.jupiter.api.Test;
 import org.apache.logging.log4j.core.impl.Log4jLogEvent;
 import static org.junit.jupiter.api.Assertions.*;
@@ -10,7 +11,7 @@ public class VelocityLayoutTest {
     void testPatternFormatting() {
         VelocityLayout layout = new VelocityLayout("[$p] $m$n");
         String formatted = layout.toSerializable(
-                Log4jLogEvent.newBuilder().setMessage(() -> "Hello!").setLevel(org.apache.logging.log4j.Level.INFO).build()
+                Log4jLogEvent.newBuilder().setMessage(new SimpleMessage("Hello!")).setLevel(org.apache.logging.log4j.Level.INFO).build()
         );
 
         assertTrue(formatted.contains("INFO"), "Should include log level");
